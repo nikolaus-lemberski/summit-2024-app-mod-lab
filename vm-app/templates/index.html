@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Get Ur Memes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .main {
-            margin-left: 30px
-        }
-    </style>
-</head>
+{% block content %}
 
 <body>
-    <div class="main">
+    <div class="main" >
         <h1>Get the wholesome memes </h1>
         <p><img src="{{meme_pic}}"</p>
         <p>Current subreddit: {{subreddit}}</p>
     </div>
 </body>
 
-</html>
+{% endblock %}
