@@ -2,7 +2,7 @@ version: 3
 
 services:
   postgres:
-    image: postgres:14-alpine
+    image: postgres:17-alpine
     ports:
       - "5432:5432"
     volumes: 
@@ -10,23 +10,23 @@ services:
     environment:
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=s3cret
-      - POSTGRES_DB=monodb
+      - POSTGRES_DB=user_db
     networks:
-      - monoapp
-  app:
-    container_name: legacy-mono-app
-    image: legacy-mono-app:latest
+      - user_service
+  user-register:
+    container_name: user-registration-app
+    image: user-registration-app:latest
     build:
       context: .
       dockerfile: Containerfile
     depends_on:
       - postgres
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
-      DATABASE_URL: postgresql://dbuser:s3cret@postgres:5432/monodb
+      DATABASE_URL: postgresql://dbuser:s3cret@postgres:5432/user_db
     networks:
-      - monoapp
+      - user_service
   #pgadmin:
   #  image: dpage/pgadmin4
   #  depends_on:
@@ -39,6 +39,6 @@ services:
   #  networks:
   #    - monoapp
 networks:
-  monoapp: {}
+  user_service: {}
 volumes:
   postgres_data: 
