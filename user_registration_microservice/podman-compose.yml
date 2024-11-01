@@ -1,4 +1,4 @@
-version: 3
+version: 3.7
 
 services:
   postgres:
@@ -8,14 +8,13 @@ services:
     volumes: 
       - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=s3cret
+      - POSTGRES_USER=user_service
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=user_db
-    networks:
-      - user_service
-  user-register:
-    container_name: user-registration-app
-    image: user-registration-app:latest
+
+  user_registration:
+    container_name: user-registration-service
+    image: user-registration-service:latest
     build:
       context: .
       dockerfile: Containerfile
@@ -24,21 +23,6 @@ services:
     ports:
       - "8081:8081"
     environment:
-      DATABASE_URL: postgresql://dbuser:s3cret@postgres:5432/user_db
-    networks:
-      - user_service
-  #pgadmin:
-  #  image: dpage/pgadmin4
-  #  depends_on:
-  #    - postgres
-  #  ports:
-  #    - "8081:80"
-  #  environment:
-  #    PGADMIN_DEFAULT_EMAIL: mail@example.com
-  #    PGADMIN_DEFAULT_PASSWORD: s3cret
-  #  networks:
-  #    - monoapp
-networks:
-  user_service: {}
+      DATABASE_URL: postgresql+asyncpg://user_service:password@postgres/user_db
 volumes:
   postgres_data: 

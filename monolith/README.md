@@ -1,32 +1,25 @@
-# Service A
+# Python Monolith Meme Web Application
 
-Simple service with one downstream call, written in Python 3 asgi with uvicorn server.
+A sample monolith python web application using Flask that allows user registration, login/logout, upload memes.
 
 Endpoints:
 
 * "/"
-* "/health"
+* "/login"
+* "/logout"
+* "/register"
+* "/upload_meme"
 
-## Develop
 
-```bash
-python3 -m venv .venv  
-source .venv/bin/activate  
-```
-
-In VSCode: Cmd-Shift-P > Select Python Interpreter > .venv/...
-
-### Install dependencies
+## Install dependencies
 
 ```bash
+pyenv activate summit-demo
 pip install -r requirements.txt  
-pip install -r requirements_dev.txt
 ```
 
-### Unit tests
-
-`python3 -m pytest`
-
-### Container image
-
-Use provided Dockerfile to create a container image.
+## Run the application
+```
+cd ./monolith
+flask run --debug
+```
