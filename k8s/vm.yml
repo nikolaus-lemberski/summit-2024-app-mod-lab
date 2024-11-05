@@ -70,9 +70,9 @@ spec:
                 - git
               runcmd:
                 - mkdir /home/user1
-                - git clone https://github.com/nikolaus-lemberski/openshift-virt.git /home/user1/app/
+                - git clone https://github.com/nikolaus-lemberski/summit-2024-app-mod-lab.git /home/user1/app/
                 - chown -R user1:user1 /home/user1/app/vm-app
                 - cd /home/user1/app/vm-app
-                - export PORT=8080
+                - export PORT=5000
                 - sh /home/user1/app/vm-app/start-on-vm.sh
           name: cloudinitdisk
